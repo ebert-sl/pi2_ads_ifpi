@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Modelos de Veículo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Lista de Modelos de Veículo</h1>
+    
+    {% if request.query_params.get('deleted') %}
+        <script>
+            alert("Modelo de Veículo excluído com sucesso!");
+        </script>
+    {% endif %}
+
+    <a href="/modelos_veiculo/create">Adicionar Modelo de Veículo</a>
+    <ul>
+        {% for item in modelos %}
+        <li>
+            {{ item.modelo.nome }} - Montadora: {{ item.montadora.nome }} - Valor de Referência: {{ item.modelo.valor_referencia }} - Motorização: {{ item.modelo.motorizacao }} - Turbo: {{ "Sim" if item.modelo.turbo else "Não" }} - Automático: {{ "Sim" if item.modelo.automatico else "Não" }}
+            <a href="/modelos_veiculo/edit/{{ item.modelo.id }}">Editar</a>
+            <form method="post" action="/modelos_veiculo/delete/{{ item.modelo.id }}" style="display:inline;">
+                <button type="submit">Deletar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

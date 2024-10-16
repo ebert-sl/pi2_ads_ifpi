@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Veículo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Criar Veículo</h1>
+    <form action="/veiculos/create" method="post">
+        <label for="modelo_id">Modelo:</label>
+        <select name="modelo_id" id="modelo_id" required>
+            {% for modelo in modelos %}
+            <option value="{{ modelo.id }}">{{ modelo.nome }}</option>
+            {% endfor %}
+        </select><br>
+        <label for="cor">Cor:</label>
+        <input type="text" name="cor" id="cor" required><br>
+        <label for="ano_fabricacao">Ano de Fabricação:</label>
+        <input type="number" name="ano_fabricacao" id="ano_fabricacao" required><br>
+        <label for="ano_modelo">Ano do Modelo:</label>
+        <input type="number" name="ano_modelo" id="ano_modelo" required><br>
+        <label for="valor">Valor:</label>
+        <input type="number" step="0.01" name="valor" id="valor" required><br>
+        <label for="placa">Placa:</label>
+        <input type="text" name="placa" id="placa" required><br>
+        <label for="vendido">Vendido:</label>
+        <input type="checkbox" name="vendido" id="vendido"><br>
+        <button type="submit">Salvar</button>
+    </form>
+    {% if success %}
+    <p>Veículo criado com sucesso!</p>
+    {% endif %}
+    <a href="/veiculos/">Voltar pra lista de veículos</a>
+</body>
+</html>

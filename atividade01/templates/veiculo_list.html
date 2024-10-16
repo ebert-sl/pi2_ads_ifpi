@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Veículos</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Lista de Veículos</h1>
+    
+    {% if request.query_params.get('deleted') %}
+        <script>
+            alert("Veículo excluído com sucesso!");
+        </script>
+    {% endif %}
+
+    <a href="/veiculos/create">Adicionar Veículo</a>
+    <ul>
+        {% for item in veiculos %}
+        <li>
+            {{ item.modelo.nome }} - Cor: {{ item.veiculo.cor }} - Ano de Fabricação: {{ item.veiculo.ano_fabricacao }} - Ano do Modelo: {{ item.veiculo.ano_modelo }} - Valor: {{ item.veiculo.valor }} - Placa: {{ item.veiculo.placa }} - Vendido: {{ "Sim" if item.veiculo.vendido else "Não" }}
+            <a href="/veiculos/edit/{{ item.veiculo.id }}">Editar</a>
+            <form method="post" action="/veiculos/delete/{{ item.veiculo.id }}" style="display:inline;">
+                <button type="submit">Deletar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

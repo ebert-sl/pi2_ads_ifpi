@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Montadora</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Editar Montadora</h1>
+    <form method="post" action="/montadoras/edit/{{ montadora.id }}">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ montadora.nome }}" required><br>
+
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais" value="{{ montadora.pais }}" required><br>
+
+        <label for="ano_fundacao">Ano de Fundação:</label>
+        <input type="number" id="ano_fundacao" name="ano_fundacao" value="{{ montadora.ano_fundacao }}" required><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    {% if success %}
+    <p>Montadora atualizada com sucesso!</p>
+    {% endif %}
+    <a href="/montadoras/">Voltar pra lista de montadoras</a>
+</body>
+</html>

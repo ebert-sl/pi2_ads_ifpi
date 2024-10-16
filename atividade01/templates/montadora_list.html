@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Montadoras</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Lista de Montadoras</h1>
+    
+    {% if request.query_params.get('deleted') %}
+        <script>
+            alert("Montadora excluída com sucesso!");
+        </script>
+    {% endif %}
+
+    <a href="/montadoras/create">Adicionar Montadora</a>
+    <ul>
+        {% for montadora in montadoras %}
+        <li>{{ montadora.nome }} - {{ montadora.pais }} - Fundada em {{ montadora.ano_fundacao }}
+            <a href="/montadoras/edit/{{ montadora.id }}">Editar</a>
+            <form method="post" action="/montadoras/delete/{{ montadora.id }}" style="display:inline;">
+                <button type="submit">Deletar</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

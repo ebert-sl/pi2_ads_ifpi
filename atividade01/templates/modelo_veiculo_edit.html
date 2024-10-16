@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Modelo de Veículo</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Editar Modelo de Veículo</h1>
+    <form method="post" action="/modelos_veiculo/edit/{{ modelo.id }}">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="{{ modelo.nome }}" required><br>
+
+        <label for="montadora_id">Montadora:</label>
+        <select id="montadora_id" name="montadora_id" required>
+            {% for montadora in montadoras %}
+            <option value="{{ montadora.id }}" {% if montadora.id == modelo.montadora_id %}selected{% endif %}>{{ montadora.nome }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="valor_referencia">Valor de Referência:</label>
+        <input type="number" step="0.01" id="valor_referencia" name="valor_referencia" value="{{ modelo.valor_referencia }}" required><br>
+
+        <label for="motorizacao">Motorização:</label>
+        <input type="number" step="0.01" id="motorizacao" name="motorizacao" value="{{ modelo.motorizacao }}" required><br>
+
+        <label for="turbo">Turbo:</label>
+        <input type="checkbox" id="turbo" name="turbo" {% if modelo.turbo %}checked{% endif %}><br>
+
+        <label for="automatico">Automático:</label>
+        <input type="checkbox" id="automatico" name="automatico" {% if modelo.automatico %}checked{% endif %}><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    {% if success %}
+    <p>Modelo de Veículo atualizado com sucesso!</p>
+    {% endif %}
+    <a href="/modelos_veiculo/">Voltar pra lista de modelos de veículo</a>
+</body>
+</html>
